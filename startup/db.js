@@ -1,19 +1,10 @@
-const Sequelize = require("sequelize");
+const mongoose = require("mongoose");
 const config = require("config");
 
 module.exports = function() {
   const db = config.get("db");
-  console.log(db);
-  const connection = new Sequelize(db);
 
-  connection
-    .authenticate()
-    .then(() => {
-      console.log(
-        "Connection to postgres server has established successfully."
-      );
-    })
-    .catch(function(err) {
-      console.log("Unable to connect to the database:", err);
-    });
+  mongoose
+    .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.info(`Connected to ${db}...`));
 };
