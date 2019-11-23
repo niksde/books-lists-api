@@ -6,7 +6,12 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(cors({ origin: "https://books-lists.herokuapp.com/" }));
+const corsOptions = {
+  origin: "https://books-lists.herokuapp.com/",
+  credentials: true // <-- REQUIRED backend setting
+};
+
+app.use(cors(corsOptions));
 
 require("./startup/db")();
 
